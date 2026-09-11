@@ -1,0 +1,164 @@
+@import "tailwindcss";
+:root {
+  --ink: #263c3a;
+  --green: #276653;
+  --cream: #fbfaf5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+button,
+input,
+select {
+  font-family: inherit;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+.button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #df8a33;
+  outline-offset: 4px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 16px;
+  padding: 13px 22px;
+  background: var(--green);
+  color: white;
+  font-weight: bold;
+  min-height: 48px;
+}
+.secondary {
+  background: white;
+  color: var(--green);
+  border: 1px solid #d8e3db;
+}
+.panel {
+  background: white;
+  border: 1px solid #e3e8df;
+  border-radius: 26px;
+  padding: 24px;
+}
+.avatar {
+  position: relative;
+  width: 150px;
+  height: 158px;
+  margin: 0 auto;
+  animation: float 4s ease-in-out infinite;
+}
+.avatar-head {
+  position: absolute;
+  inset: 12px 12px 20px;
+  border-radius: 44% 44% 48% 48%;
+  background: #efb78b;
+  border: 5px solid #ad724f;
+  box-shadow: inset 0 12px #704936;
+}
+.avatar-hair {
+  position: absolute;
+  width: 130px;
+  height: 65px;
+  top: 0;
+  left: 10px;
+  background: #704936;
+  border-radius: 65% 55% 35% 25%;
+  transform: rotate(-7deg);
+}
+.avatar-eye {
+  position: absolute;
+  top: 60px;
+  width: 10px;
+  height: 13px;
+  background: #413b35;
+  border-radius: 50%;
+}
+.avatar-eye.left {
+  left: 29px;
+}
+.avatar-eye.right {
+  right: 29px;
+}
+.avatar-mouth {
+  position: absolute;
+  left: 46px;
+  top: 88px;
+  width: 25px;
+  height: 12px;
+  background: #874b43;
+  border-radius: 0 0 20px 20px;
+}
+.avatar-shirt {
+  position: absolute;
+  bottom: 0;
+  left: 19px;
+  height: 45px;
+  width: 112px;
+  background: #438477;
+  border-radius: 45px 45px 15px 15px;
+}
+.speaking .avatar-mouth {
+  animation: talk 0.3s infinite alternate;
+}
+.listening {
+  filter: drop-shadow(0 0 12px #69b7a7);
+}
+.celebrate {
+  animation: pop 0.65s ease-in-out;
+}
+.mic-listening {
+  animation: pulse 1s infinite;
+}
+@keyframes float {
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes talk {
+  to {
+    height: 22px;
+    width: 19px;
+  }
+}
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 14px #b9ddd380;
+  }
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.2) rotate(4deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.large-text p, .large-text label, .large-text button, .large-text input { font-size: 1.25rem; }

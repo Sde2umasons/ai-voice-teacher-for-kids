@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+model User {
+  id String @id @default(cuid())
+  role String @default("CHILD")
+  children ChildProfile[]
+  teacher TeacherProfile?
+}
+model TeacherProfile {
+  id String @id @default(cuid())
+  name String
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+}
+model ChildProfile {
+  id String @id @default(cuid())
+  name String @default("Explorer")
+  age Int @default(5)
+  preferredLanguage String @default("en")
+  avatar String @default("fox")
+  stars Int @default(0)
+  createdAt DateTime @default(now())
+  userId String?
+  user User? @relation(fields: [userId], references: [id])
+  progress LessonProgress[]
+  quizzes QuizAttempt[]
+  achievements Achievement[]
+  sessions LearningSession[]
+  activities Activity[]
+}
+model Lesson {
+  id String @id
+  title String
+  progress LessonProgress[]
+}
+model LessonProgress {
+  id String @id @default(cuid())
+  childId String
+  lessonId String
+  currentStep Int @default(0)
+  completedSteps String @default("[]")
+  completed Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  child ChildProfile @relation(fields: [childId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+  @@unique([childId, lessonId])
+}
+model QuizAttempt {
+  id String @id @default(cuid())
+  childId String
+  quizType String
+  correctAnswers Int
+  totalQuestions Int
+  createdAt DateTime @default(now())
+  child ChildProfile @relation(fields: [childId], references: [id])
+}
+model Achievement {
+  id String @id @default(cuid())
+  childId String
+  name String
+  createdAt DateTime @default(now())
+  child ChildProfile @relation(fields: [childId], references: [id])
+  @@unique([childId, name])
+}
+model LearningSession {
+  id String @id @default(cuid())
+  childId String
+  startedAt DateTime @default(now())
+  endedAt DateTime?
+  learningSeconds Int @default(0)
+  child ChildProfile @relation(fields: [childId], references: [id])
+}
+model Activity {
+  id String @id @default(cuid())
+  childId String
+  description String
+  createdAt DateTime @default(now())
+  child ChildProfile @relation(fields: [childId], references: [id])
+}
