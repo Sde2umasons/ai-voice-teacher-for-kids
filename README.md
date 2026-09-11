@@ -27,9 +27,7 @@ npm run dev
 
 PowerShell environment-copy equivalent: `Copy-Item .env.example .env`.
 
-Open **http://127.0.0.1:3000**. The server binds to loopback for this local prototype.
-
-If Prisma on Windows reports an empty “Schema engine error” for a new SQLite database, create the file with `New-Item prisma/dev.db -ItemType File`, then rerun `npm run db:push`. Do not overwrite an existing database.
+ For a one-command Windows setup and launch, run `./run.ps1` from the project root. It creates `.env` when needed, installs missing dependencies, prepares the database, runs the documented checks, and starts the development server. Use `./run.ps1 -SkipChecks` for a faster launch after the project is already validated.
 
 ## First milestone
 
